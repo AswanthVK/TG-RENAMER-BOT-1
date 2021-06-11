@@ -13,8 +13,19 @@ from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from ..database.database import *
 from pyrogram import Client as RenamerNs, filters
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, ForceReply
 from pyrogram.errors import PeerIdInvalid, ChannelInvalid, FloodWait
 from pyrogram.emoji import *
+
+
+async def force_name(c, m):
+
+    await c.send_message(
+        message.reply_to_message.from_user.id,
+        "Now send me New Name without Extension",
+        reply_to_message_id=message.reply_to_message.message_id,
+        reply_markup=ForceReply(True)
+    )
 
 
 @RenamerNs.on_message((filters.document|filters.video) & filters.private & filters.incoming)
@@ -35,7 +46,7 @@ async def media(c, m):
         if time_gap:
             return
 
-    file_name = await c.ask(chat_id=m.from_user.id, text="Send me the New FileName for this file or send /cancel to stop", filters=filters.text)
+    file_name = await c.ask(chat_id=m.from_user.id, reply_markup=forceReply(True), filters=filters.text)
     await file_name.delete()
     await file_name.request.delete()
     new_file_name = file_name.text
