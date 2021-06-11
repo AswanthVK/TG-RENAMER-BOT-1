@@ -46,7 +46,7 @@ async def media(c, m):
         if time_gap:
             return
 
-    file_name = await c.ask(chat_id=m.from_user.id, reply_text=ForceReply(True), filters=filters.text)
+    file_name = await c.ask(chat_id=m.from_user.id, reply_text=ForceReply(True), filters=filters.reply_text)
     await file_name.delete()
     await file_name.request.delete()
     new_file_name = file_name.text
