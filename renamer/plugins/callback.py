@@ -4,6 +4,7 @@ logger = logging.getLogger(__name__)
 from .commands import *
 from ..config import Config
 from ..tools.text import TEXT
+from ..plugins.rename import force_name
 from pyrogram import Client as RenamerNs, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.errors import UserBannedInChannel, UserNotParticipant
@@ -13,7 +14,7 @@ from pyrogram.emoji import *
 ################## Callback for Rename button ##################
 
 @RenamerNs.on_callback_query(filters.regex('rename_button'))
-async def rename_button_cback(c,m):
+async def rename_button_cb(c,m):
   await m.message.delete()
   await force_name(c, m.message)
 
