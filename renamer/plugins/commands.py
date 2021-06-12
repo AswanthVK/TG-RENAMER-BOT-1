@@ -15,7 +15,7 @@ from pyrogram.emoji import *
 async def help(c, m, cb=False):
     button = [[
         InlineKeyboardButton(f'Updates Channel', url='https://t.me/NewBotz'),
-        InlineKeyboardButton(f'Share & Support Me', url='tg://msg?text=Hai%20Friend%2C%0D%0AAm%20Introducing%20a%20Powerful%20%2A%2AConverter%20Bot%2A%2A%20for%20Free.%0D%0A%2A%2ABot%20Link%2A%2A%20%3A%20%40NewConverter_Bot'),
+        InlineKeyboardButton(f'Share & Support Me', url='tg://msg?text=Hai%20Friend%2C%0D%0AAm%20Introducing%20a%20Powerful%20%2A%2AConverter%20Bot%2A%2A%20for%20Free.%0D%0A%2A%2ABot%20Link%2A%2A%20%3A%20%40NewConverter_Bot')
         ],[
         InlineKeyboardButton(f'{HOUSE_WITH_GARDEN} Home', callback_data='back'),
         InlineKeyboardButton(f'{NO_ENTRY} 𝙲𝚕𝚘𝚜𝚎', callback_data='close')
@@ -67,9 +67,6 @@ async def start(c, m, cb=False):
 
 @RenamerNs.on_message(filters.command("about") & filters.private & filters.incoming)
 async def about(c, m, cb=False):
-    me = await c.get_me()
-    owner = await c.get_users(Config.OWNER_ID)
-
     button = [[
         InlineKeyboardButton(f'{HOUSE_WITH_GARDEN} Home', callback_data='back'),
         InlineKeyboardButton(f'{NO_ENTRY} Close', callback_data="close")
