@@ -67,9 +67,12 @@ async def start(c, m, cb=False):
 
 @RenamerNs.on_message(filters.command("about") & filters.private & filters.incoming)
 async def about(c, m, cb=False):
+    me = await c.get_me()
+    owner = await c.get_users(Config.OWNER_ID)
+
     button = [[
         InlineKeyboardButton(f'{HOUSE_WITH_GARDEN} Home', callback_data='back'),
-        InlineKeyboardButton(f'{NO_ENTRY} Close', callback_data="close")
+        InlineKeyboardButton(f'{NO_ENTRY} Close', callback_data='close')
     ]]
     reply_markup = InlineKeyboardMarkup(button)
     if cb:
