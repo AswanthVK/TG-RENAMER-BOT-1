@@ -130,7 +130,7 @@ async def media(c, m):
 
     caption = str(new_file_name)
     if Config.CUSTOM_CAPTION:
-        caption += f"\n\n {Config.CUSTOM_CAPTION}"
+        caption += f"\n\n **{Config.CUSTOM_CAPTION}**"
     as_file = (await get_data(m.from_user.id)).upload_mode
     if as_file:
         try:
