@@ -166,7 +166,7 @@ async def media(c, m):
             logger.error(e)
 
     try:
-        await send_message.edit(TEXT.UPLOAD_SUCESS, disable_web_page_preview=True)
+        await send_message.edit(TEXT.UPLOAD_SUCESS, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="♻️  SHARE ME  ♻️", url="tg://msg?text=Hai%20Friend%2C%0D%0AAm%20Introducing%20a%20Powerful%20%2A%2AConverter%20Bot%2A%2A%20for%20Free.%0D%0A%2A%2ABot%20Link%2A%2A%20%3A%20%40NewConverter_Bot")]]), disable_web_page_preview=True)
         if trace_msg:
             await trace_msg.edit(f'**User Name:** {m.from_user.mention(style="md")}\n\n**User Id:** `{m.from_user.id}`\n\n**New File Name:** `{new_file_name}`\n\n**Status:** Uploaded Sucessfully {CHECK_MARK_BUTTON}')
         os.remove(new_file_location)
