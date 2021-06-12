@@ -10,7 +10,7 @@ class TEXT:
     DELETED_CUSTOM_THUMBNAIL = f"❎ Thumbnail Deleted Successfully."
     NO_CUSTOM_THUMB_NAIL_FOUND = f"𝖭𝗈 T𝗁𝗎𝗆𝖻𝗇𝖺𝗂𝗅 𝖥𝗈𝗎𝗇𝖽. 😅"
     THUMBNAIL_CAPTION = f"☝️ Your Permanent thumbnail"
-    CAPTION_TEXT = "** {} **"
+    CAPTION_TEXT = f"** {} **"
 
 
     ABOUT = """** My Name :** `Converter Bot`
