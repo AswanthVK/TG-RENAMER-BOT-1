@@ -6,10 +6,10 @@ class TEXT:
     UPLOAD_SUCESS = f"{GRINNING_FACE} Thank you for using me."
     BANNED_USER_TEXT = f"Hey bro, you are **banned** from using me {FACE_WITH_TEARS_OF_JOY}."
     NOT_LOGGED_TEXT = f"This bot was only for private use {LOCKED_WITH_KEY}. If you want to use this bot you need to send me correct password in the format `/login bot_password`"
-    SAVED_CUSTOM_THUMBNAIL = f"Thumbnail Saved Permanently."
-    DELETED_CUSTOM_THUMBNAIL = f"Thumbnail Deleted Successfully."
-    NO_CUSTOM_THUMB_NAIL_FOUND = f"𝖭𝗈 T𝗁𝗎𝗆𝖻𝗇𝖺𝗂𝗅 𝖥𝗈𝗎𝗇𝖽."
-    THUMBNAIL_CAPTION = f"Your Permanent thumbnail"
+    SAVED_CUSTOM_THUMBNAIL = f"✅ Thumbnail Saved Permanently."
+    DELETED_CUSTOM_THUMBNAIL = f"❎ Thumbnail Deleted Successfully."
+    NO_CUSTOM_THUMB_NAIL_FOUND = f"𝖭𝗈 T𝗁𝗎𝗆𝖻𝗇𝖺𝗂𝗅 𝖥𝗈𝗎𝗇𝖽. 😅"
+    THUMBNAIL_CAPTION = f"☝️ Your Permanent thumbnail"
 
 
     ABOUT = """** My Name :** `Converter Bot`
