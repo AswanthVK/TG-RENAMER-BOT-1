@@ -11,14 +11,6 @@ from pyrogram.errors import UserBannedInChannel, UserNotParticipant
 from pyrogram.emoji import *
 
 
-################## Callback for Rename button ##################
-
-@RenamerNs.on_callback_query(filters.regex('rename_button'))
-async def rename_button_cb(c,m):
-  await m.message.delete()
-  await force_name(c, m.message)
-
-
 ################## Callback for help button ##################
 
 @RenamerNs.on_callback_query(filters.regex('^help$'))
