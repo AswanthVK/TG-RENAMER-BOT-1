@@ -9,7 +9,7 @@ class TEXT:
     SAVED_CUSTOM_THUMBNAIL = f"{WHITE_HEAVY_CHECK_MARK} Thumbnail Saved Permanently."
     DELETED_CUSTOM_THUMBNAIL = f"Thumbnail Deleted Successfully."
     NO_CUSTOM_THUMB_NAIL_FOUND = f"𝖭𝗈 T𝗁𝗎𝗆𝖻𝗇𝖺𝗂𝗅 𝖥𝗈𝗎𝗇𝖽. {SMILING_FACE_WITH_OPEN_MOUTH_AND_COLD_SWEAT}"
-    THUMBNAIL_CAPTION = f"{BACKHAND_INDEX_POINTING_UP} Your Permanent thumbnail"
+    THUMBNAIL_CAPTION = f"Your Permanent thumbnail"
 
 
     ABOUT = """** My Name :** `Converter Bot`
