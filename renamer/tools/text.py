@@ -28,9 +28,9 @@ class TEXT:
     HELP_USER = """**Follow Below Steps:**
    
 ☞︎︎︎ Use /mode command to change upload mode.
-☞︎︎︎ Send a photo to set as permanent thumbnail.
+☞︎︎︎ Send a photo to set as permanent thumbnail (optional).
 ☞︎︎︎ Now send me the Telegram file you want to convert.
-☞︎︎︎ Send the new name for your file.
+☞︎︎︎ Send the new name for your file or /cancel (otherwise you can't use me again).
 
 **Note: You must subscribe My updates Channel for using me.**
 """
