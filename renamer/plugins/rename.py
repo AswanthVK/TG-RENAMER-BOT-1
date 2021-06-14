@@ -18,6 +18,10 @@ from pyrogram.errors import PeerIdInvalid, ChannelInvalid, FloodWait
 from pyrogram.emoji import *
 
 
+async def _(c,m):
+  filename = m.document.file_name
+
+
 async def force_name(c, m):
 
     await c.send_message(
@@ -31,8 +35,6 @@ async def force_name(c, m):
 @RenamerNs.on_message((filters.document|filters.video) & filters.private & filters.incoming)
 async def media(c, m):
     """Checking and Processing the renaming"""
-  
-    filename = m.document.file_name
 
     if Config.BANNED_USERS:
         if m.from_user.id in Config.BANNED_USERS:
