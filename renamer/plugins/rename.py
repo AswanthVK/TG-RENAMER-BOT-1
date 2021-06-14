@@ -18,10 +18,6 @@ from pyrogram.errors import PeerIdInvalid, ChannelInvalid, FloodWait
 from pyrogram.emoji import *
 
 
-async def _(c,m):
-  filename = m.document.file_name
-
-
 async def force_name(c, m):
 
     await c.send_message(
@@ -50,7 +46,7 @@ async def media(c, m):
         if time_gap:
             return
 
-    file_name = await c.ask(chat_id=m.from_user.id, text="File Name: `{filename}`\n\nNow Send Me New Name or /cancel", reply_markup=ForceReply(True), filters=filters.text)
+    file_name = await c.ask(chat_id=m.from_user.id, text="**File Name:** __Eg:- Newname.mkv__\n\nNow Send Me New Name or /cancel", reply_markup=ForceReply(True), filters=filters.text)
     await file_name.delete()
     await file_name.request.delete()
     new_file_name = file_name.text
