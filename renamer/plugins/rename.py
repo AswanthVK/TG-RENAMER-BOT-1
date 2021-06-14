@@ -52,7 +52,7 @@ async def media(c, m):
         if time_gap:
             return
 
-    file_name = await c.ask(chat_id=m.from_user.id, text="File Name: {}\n\nNow Send Me New Name or /cancel".fomat(filename), reply_markup=ForceReply(True), filters=filters.text)
+    file_name = await c.ask(chat_id=m.from_user.id, text="File Name: {'(filename)'}\n\nNow Send Me New Name or /cancel", reply_markup=ForceReply(True), filters=filters.text)
     await file_name.delete()
     await file_name.request.delete()
     new_file_name = file_name.text
