@@ -32,7 +32,7 @@ async def force_name(c, m):
 async def media(c, m):
     """Checking and Processing the renaming"""
   
-    filename = os.path(file_name)
+    filename = m.document.file_name
 
     if Config.BANNED_USERS:
         if m.from_user.id in Config.BANNED_USERS:
