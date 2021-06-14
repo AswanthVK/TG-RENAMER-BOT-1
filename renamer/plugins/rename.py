@@ -31,12 +31,8 @@ async def force_name(c, m):
 @RenamerNs.on_message((filters.document|filters.video) & filters.private & filters.incoming)
 async def media(c, m):
     """Checking and Processing the renaming"""
-
-    file = m.document or m.video or m.audio or m.voice or m.video_note
-    try:
-        filename = file.file_name
-    except:
-        filename = "Not Available"  
+  
+    filename = os.path(file_name)
 
     if Config.BANNED_USERS:
         if m.from_user.id in Config.BANNED_USERS:
