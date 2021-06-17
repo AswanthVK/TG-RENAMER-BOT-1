@@ -5,10 +5,19 @@ from .commands import *
 from ..config import Config
 from ..tools.text import TEXT
 from ..plugins.rename import force_name
+from ..plugins.1 import force_sub
 from pyrogram import Client as RenamerNs, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.errors import UserBannedInChannel, UserNotParticipant
 from pyrogram.emoji import *
+
+
+################## Callback for start button ##################
+
+@RenamerNs.on_callback_query(filters.regex('^start$'))
+async def start_cb(c, m):
+    await m.answer()
+    await start(c, m, True)
 
 
 ################## Callback for help button ##################
