@@ -19,7 +19,7 @@ async def force_sub(c, m):
         except UserNotParticipant:
             button = [[
                 InlineKeyboardButton('join Updates channel', url=f'https://t.me/{Config.FORCE_SUB}')
-            ],[
+                ],[
                 InlineKeyboardButton('🔄 Refresh 🔄', callback_data='start')
             ]]
             markup = InlineKeyboardMarkup(button)
