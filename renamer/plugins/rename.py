@@ -89,7 +89,7 @@ async def media(c, m):
     start_time = time.time()
     try:
         file_location = await m.download(
-                            newfile_name=download_location,
+                            file_name=download_location,
                             progress=progress_bar,
                             progress_args=("Downloading:", start_time, send_message)
                         )
