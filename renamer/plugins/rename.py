@@ -56,10 +56,10 @@ async def media(c, m):
         if time_gap:
             return
 
-    file_name = await c.ask(chat_id=m.from_user.id, text="**File Name:** `{}`\n\nNow Send Me New Name or /cancel", reply_markup=ForceReply(True), filters=filters.text(format(filename))
-    await file_name.delete()
-    await file_name.request.delete()
-    new_file_name = file_name.text
+    newfile_name = await c.ask(chat_id=m.from_user.id, text="**File Name:** `{}`\n\nNow Send Me New Name or /cancel".format(filename), reply_markup=ForceReply(True), filters=filters.text)
+    await newfile_name.delete()
+    await newfile_name.request.delete()
+    new_file_name = newfile_name.text
     if new_file_name.lower() == "/cancel":
         return
 
@@ -89,7 +89,7 @@ async def media(c, m):
     start_time = time.time()
     try:
         file_location = await m.download(
-                            file_name=download_location,
+                            newfile_name=download_location,
                             progress=progress_bar,
                             progress_args=("Downloading:", start_time, send_message)
                         )
