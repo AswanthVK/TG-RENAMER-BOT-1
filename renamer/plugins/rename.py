@@ -6,7 +6,7 @@ import time
 import random
 from ..config import Config
 from ..tools.text import TEXT
-from ..tools.progress_bar import progress_bar, take_screen_shot
+from ..tools.progress_bar import progress_bar, take_screen_shot, humanbytes
 from ..tools.timegap_check import timegap_check
 from ..tools.thumbnail_fixation import fix_thumb
 from hachoir.metadata import extractMetadata
@@ -56,7 +56,7 @@ async def media(c, m):
         if time_gap:
             return
 
-    newfile_name = await c.ask(chat_id=m.from_user.id, text="**File Name:** `{}`\n\nNow Send Me New Name or /cancel".format(filename), reply_markup=ForceReply(True), filters=filters.text)
+    newfile_name = await c.ask(chat_id=m.from_user.id, text="**File Name:** `{}`\n**Size:** {}\n\nNow Send Me New Name or /cancel".format(filename, humanbytes(filesize)), reply_markup=ForceReply(True), filters=filters.text)
     await newfile_name.delete()
     await newfile_name.request.delete()
     new_file_name = newfile_name.text
