@@ -32,6 +32,16 @@ async def force_name(c, m):
 async def media(c, m):
     """Checking and Processing the renaming"""
 
+    file = m.document or m.video or m.audio or m.voice or m.video_note
+    try:
+        filename = file.file_name
+    except:
+        filename = "Not Available"  
+
+    else:
+        filesize = file.file_size
+        filetype = file.mime_type
+
     if Config.BANNED_USERS:
         if m.from_user.id in Config.BANNED_USERS:
             return await m.reply_text(TEXT.BANNED_USER_TEXT, quote=True)
@@ -46,7 +56,7 @@ async def media(c, m):
         if time_gap:
             return
 
-    file_name = await c.ask(chat_id=m.from_user.id, text="**File Name:** __Eg:- Newname.mkv__\n\nNow Send Me New Name or /cancel", reply_markup=ForceReply(True), filters=filters.text)
+    file_name = await c.ask(chat_id=m.from_user.id, text="**File Name:** `{}`\n\nNow Send Me New Name or /cancel".fomat(filename), reply_markup=ForceReply(True), filters=filters.text)
     await file_name.delete()
     await file_name.request.delete()
     new_file_name = file_name.text
