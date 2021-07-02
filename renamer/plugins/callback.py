@@ -5,10 +5,19 @@ from .commands import *
 from ..config import Config
 from ..tools.text import TEXT
 from ..plugins.rename import force_name
+from ..plugins.short_url import link_handler
 from pyrogram import Client as RenamerNs, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.errors import UserBannedInChannel, UserNotParticipant
 from pyrogram.emoji import *
+
+
+################## Callback for start button ##################
+
+@RenamerNs.on_callback_query(filters.regex('^shortlink$'))
+async def shorturl_cb(c, m):
+    await m.answer()
+    await link_handler(c, m, True)
 
 
 ################## Callback for start button ##################
