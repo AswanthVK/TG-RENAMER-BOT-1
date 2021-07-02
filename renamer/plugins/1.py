@@ -20,7 +20,7 @@ async def force_sub(c, m):
             button = [[
                 InlineKeyboardButton('join Updates channel', url=f'https://t.me/{Config.FORCE_SUB}')
                 ],[
-                InlineKeyboardButton('🔄 Refresh 🔄', url=f'https://t.me/{Config.FORCE_SUB}?start')
+                InlineKeyboardButton('🔄 Refresh 🔄', url=f'https://t.me/NewConverter_Bot?start')
             ]]
             markup = InlineKeyboardMarkup(button)
             return await m.reply_text(text="Hey join in my updates channel to use me.", parse_mode='markdown', reply_markup=markup, quote=True)
