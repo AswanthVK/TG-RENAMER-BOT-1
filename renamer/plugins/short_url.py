@@ -51,10 +51,10 @@ def get_shortlink(url):
            ''' Bittly Shorten'''
            s = Shortener(Config.BITLY_KEY)
            shortened_url = s.bitly.short(url)
-       else:
-           ''' Da.gd : I prefer this '''
-           s = Shortener()
-           shortened_url = s.dagd.short(url)
+       #else:
+           #''' Da.gd : I prefer this '''
+           #s = Shortener()
+           #shortened_url = s.dagd.short(url)
     except Exception as error:
         Err = f"#ERROR: {error}"
         log.info(Err)
