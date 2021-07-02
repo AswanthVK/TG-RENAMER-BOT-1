@@ -24,7 +24,7 @@ from renamer.config import Config
 @Client.on_message(filters.regex(r'https?://[^\s]+'))
 #@Client.on_message(filters.command(["shorturl"]))
 async def link_handler(bot, update):
-    file_name = None
+    #file_name = None
     url = update.text
     #log_msg = None
     #log_msg = await update.forward(chat_id=BIN_CHANNEL)
@@ -51,10 +51,10 @@ def get_shortlink(url):
            ''' Bittly Shorten'''
            s = Shortener(Config.BITLY_KEY)
            shortened_url = s.bitly.short(url)
-       #else:
-           #''' Da.gd : I prefer this '''
-           #s = Shortener()
-           #shortened_url = s.dagd.short(url)
+       else:
+           ''' Da.gd : I prefer this '''
+           s = Shortener()
+           shortened_url = s.dagd.short(url)
     except Exception as error:
         Err = f"#ERROR: {error}"
         log.info(Err)
