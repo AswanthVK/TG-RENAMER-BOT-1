@@ -56,6 +56,10 @@
             "description": "Set the timegap in sec to reduce FloodWait. If you don't want to add leave empty. ",
             "required": false
         },
+        "BITLY_KEY": {
+            "description": "Bitly token. ",
+            "required": false
+        },
         "TRACE_CHANNEL": {
             "description": "A telegram channel or group link to know who are using bot",
             "required": false
