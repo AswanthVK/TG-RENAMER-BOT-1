@@ -49,7 +49,8 @@ def get_shortlink(url):
     try:
        if Config.BITLY_KEY:
            ''' Bittly Shorten'''
-           s = Shortener(Config.BITLY_KEY)
+           a = {}.format(Config.BITLY_KEY)
+           s = Shortener(a) #Config.BITLY_KEY)
            shortened_url = s.bitly.short(url)
        else:
            ''' Da.gd : I prefer this '''
