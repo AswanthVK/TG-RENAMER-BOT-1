@@ -201,13 +201,13 @@ async def rename_cb(bot, update):
         #else:
     if mime == "video":
             markup = InlineKeyboardMarkup([[ 
-            InlineKeyboardButton("📁 Documents",callback_data = "doc"), 
-            InlineKeyboardButton("🎥 Video",callback_data = "vid") ]])
+            InlineKeyboardButton("📁 Documents",callback_data = "document"), 
+            InlineKeyboardButton("🎥 Video",callback_data = "video") ]])
     elif mime == "audio":
-            markup = InlineKeyboardMarkup([[ InlineKeyboardButton("📁 Documents",callback_data = "doc")
-            ,InlineKeyboardButton("🎵 audio",callback_data = "aud") ]])
+            markup = InlineKeyboardMarkup([[ InlineKeyboardButton("📁 Documents",callback_data = "document")
+            ,InlineKeyboardButton("🎵 audio",callback_data = "audio") ]])
     else:
-            markup = InlineKeyboardMarkup([[ InlineKeyboardButton("📁 Documents",callback_data = "doc") ]]) 		
+            markup = InlineKeyboardMarkup([[ InlineKeyboardButton("📁 Documents",callback_data = "document") ]]) 		
         		       
     await bot.send_message(
         chat_id=update.chat.id,
