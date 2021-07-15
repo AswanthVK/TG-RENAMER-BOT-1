@@ -1,6 +1,7 @@
 import logging
 logger = logging.getLogger(__name__)
 
+import pyrogram
 from .commands import *
 from ..config import Config
 from ..tools.text import TEXT
@@ -74,23 +75,14 @@ async def about_cb(c, m):
 
 ################## Callback for start button ##################
 
-@RenamerNs.on_callback_query(filters.regex('^doc$'))
-async def doc_cb(c, m):
-    await m.answer()
-    await doc(c, m, True)
+@RenamerNs.on_callback_query()
+async def cb_handler(bot, update):
+        
+    if "rename_button" in update.data:
+        await update.message.delete()
+        await force_name(bot, update.message)
+        
+    elif "cancel_e" in update.data:
+        await update.message.delete()
+        await cancel_extract(bot, update.message)
 
-
-################## Callback for start button ##################
-
-@RenamerNs.on_callback_query(filters.regex('^video$'))
-async def vid_cb(c, m):
-    await m.answer()
-    await vid(c, m, True)
-
-
-################## Callback for start button ##################
-
-@RenamerNs.on_callback_query(filters.regex('^aud$'))
-async def aud_cb(c, m):
-    await m.answer()
-    await aud(c, m, True)
