@@ -196,17 +196,18 @@ async def rename_cb(bot, update):
             #)
             #return
         #else:
+    if mime == "video":
+            markup = InlineKeyboardMarkup([[ 
+            InlineKeyboardButton("📁 Documents",callback_data = "doc"), 
+            InlineKeyboardButton("🎥 Video",callback_data = "vid") ]])
+    elif mime == "audio":
+              markup = InlineKeyboardMarkup([[ InlineKeyboardButton("📁 Documents",callback_data = "doc")
+              ,InlineKeyboardButton("🎵 audio",callback_data = "aud") ]])
+        		       
     await bot.send_message(
         chat_id=update.chat.id,
         text="<b>File Name:</b> <code>{}</code> \n<b>Size:</b> {} \n<b>Format:</b> {} ".format(filename,humanbytes(filesize),mime),
-        if mime == "video":
-        	reply_markup = InlineKeyboardMarkup([[ 
-        	InlineKeyboardButton("📁 Documents",callback_data = "doc"), 
-        	InlineKeyboardButton("🎥 Video",callback_data = "vid") ]])
-        elif mime == "audio":
-        	reply_markup = InlineKeyboardMarkup([[ InlineKeyboardButton("📁 Documents",callback_data = "doc")
-        	,InlineKeyboardButton("🎵 audio",callback_data = "aud") ]])
-        		
+        reply_markup=markup,
         #reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="Rename", callback_data="rename_button"),
                                                 #InlineKeyboardButton(text="Cancel", callback_data="cancel_e")]]),
         parse_mode="html",
