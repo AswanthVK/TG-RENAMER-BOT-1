@@ -73,16 +73,20 @@ async def about_cb(c, m):
     await about(c, m, True)
 
 
-################## Callback for start button ##################
+################## Callback for rename button ##################
 
 @RenamerNs.on_callback_query()
 async def cb_handler(bot, update):
         
-    if "rename_button" in update.data:
+    if "document" in update.data:
         await update.message.delete()
-        await force_name(bot, update.message)
+        await doc(bot, update.message)
         
-    elif "cancel_e" in update.data:
+    elif "video" in update.data:
         await update.message.delete()
-        await cancel_extract(bot, update.message)
+        await vid(bot, update.message)
+
+    elif "audio" in update.data:
+        await update.message.delete()
+        await aud(bot, update.message)
 
