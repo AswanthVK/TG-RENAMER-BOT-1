@@ -149,7 +149,7 @@ async def vid(c, m):
     #if as_file:
     try:
         await m.reply_video(
-            document=new_file_location,
+            video=new_file_location,
             duration=duration,
             width=width,
             height=height,
