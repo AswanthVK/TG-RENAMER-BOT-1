@@ -3,7 +3,6 @@ logger = logging.getLogger(__name__)
 
 from ..config import Config
 from ..tools.text import TEXT
-from ..tools.progress_bar import humanbytes
 from ..database.database import *
 from pyrogram import Client as RenamerNs, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup 
@@ -157,65 +156,3 @@ async def password(c, m):
         await m.reply_text(f'**This bot was publicly available to all {SMILING_FACE_WITH_HEARTS}.**\nIf you are the owner of the bot to make bot private add bot password in Config Vars {LOCKED_WITH_KEY}.', quote=True)
 
 
-@RenamerNs.on_message(filters.private & (filters.document | filters.video | filters.audio | filters.voice | filters.video_note))   
-async def rename_cb(bot, update):
- 
-    file = update.document or update.video or update.audio or update.voice or update.video_note
-    try:
-        filename = file.file_name
-    except:
-        filename = "Not Available"  
-
-    else:
-        filesize = file.file_size
-        filetype = file.mime_type
-        types = file.mime_type.split("/")
-        mime = types[0]
-
-    #if Config.TIME_GAP:
-        #time_gap = await timegap_check(update)
-        #if time_gap:
-            #return
- 
-    #if Config.BANNED_USERS:
-        #if update.from_user.id in Config.BANNED_USERS:
-            #return await update.reply_text(f'Sorry!, You are BANNED.', quote=True)
- 
-    #if update.from_user.id not in Config.BANNED_USERS:
-        #update_channel = Config.UPDATE_CHANNEL
-    #if update_channel:
-        #try:
-            #user = await bot.get_chat_member(update_channel, update.chat.id)
-            #if user.status == "kicked":
-               #await update.reply_text(" Sorry, You are **B A N N E D**")
-               #return
-        #except UserNotParticipant:
-            #await update.reply_text(f"Join @{update_channel} To Use Me")
-            #await update.reply_text(
-                #text="**Please Join My Update Channel Before Using Me..**",
-                #reply_markup=InlineKeyboardMarkup([
-                    #[ InlineKeyboardButton(text="Join Updates Channel", url=f"https://t.me/{update_channel}")]
-              #])
-            #)
-            #return
-        #else:
-    if mime == "video":
-            markup = InlineKeyboardMarkup([[ 
-            InlineKeyboardButton("📁 Documents",callback_data = "document"), 
-            InlineKeyboardButton("🎥 Video",callback_data = "video") ]])
-    elif mime == "audio":
-            markup = InlineKeyboardMarkup([[ InlineKeyboardButton("📁 Documents",callback_data = "document")
-            ,InlineKeyboardButton("🎵 audio",callback_data = "audio") ]])
-    else:
-            markup = InlineKeyboardMarkup([[ InlineKeyboardButton("📁 Documents",callback_data = "document") ]]) 		
-        		       
-    await bot.send_message(
-        chat_id=update.chat.id,
-        text="<b>File Name:</b> <code>{}</code> \n<b>Size:</b> {} \n<b>Format:</b> {} ".format(filename,humanbytes(filesize),filetype),
-        reply_markup=markup,
-        #reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="Rename", callback_data="rename_button"),
-                                                #InlineKeyboardButton(text="Cancel", callback_data="cancel_e")]]),
-        parse_mode="html",
-        reply_to_message_id=update.message_id,
-        disable_web_page_preview=True   
-    )   
