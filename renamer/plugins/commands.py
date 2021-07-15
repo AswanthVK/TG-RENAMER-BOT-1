@@ -168,7 +168,9 @@ async def rename_cb(bot, update):
 
     else:
         filesize = file.file_size
-        mime = file.mime_type
+        filetype = file.mime_type
+        types = file.mime_type.split("/")
+        mime = types[0]
 
     #if Config.TIME_GAP:
         #time_gap = await timegap_check(update)
@@ -209,7 +211,7 @@ async def rename_cb(bot, update):
         		       
     await bot.send_message(
         chat_id=update.chat.id,
-        text="<b>File Name:</b> <code>{}</code> \n<b>Size:</b> {} \n<b>Format:</b> {} ".format(filename,humanbytes(filesize),mime),
+        text="<b>File Name:</b> <code>{}</code> \n<b>Size:</b> {} \n<b>Format:</b> {} ".format(filename,humanbytes(filesize),filetype),
         reply_markup=markup,
         #reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="Rename", callback_data="rename_button"),
                                                 #InlineKeyboardButton(text="Cancel", callback_data="cancel_e")]]),
