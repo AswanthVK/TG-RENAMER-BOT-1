@@ -4,7 +4,9 @@ logger = logging.getLogger(__name__)
 from .commands import *
 from ..config import Config
 from ..tools.text import TEXT
-from ..plugins.rename import force_name
+from ..plugins.rename import force_name, doc
+from ..plugins.video import vid
+from ..plugins.audio import aud
 from pyrogram import Client as RenamerNs, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.errors import UserBannedInChannel, UserNotParticipant
@@ -68,3 +70,27 @@ async def back_cb(c, m):
 async def about_cb(c, m):
     await m.answer()
     await about(c, m, True)
+
+
+################## Callback for start button ##################
+
+@RenamerNs.on_callback_query(filters.regex('^doc$'))
+async def doc_cb(c, m):
+    await m.answer()
+    await doc(c, m, True)
+
+
+################## Callback for start button ##################
+
+@RenamerNs.on_callback_query(filters.regex('^video$'))
+async def vid_cb(c, m):
+    await m.answer()
+    await vid(c, m, True)
+
+
+################## Callback for start button ##################
+
+@RenamerNs.on_callback_query(filters.regex('^aud$'))
+async def aud_cb(c, m):
+    await m.answer()
+    await aud(c, m, True)
