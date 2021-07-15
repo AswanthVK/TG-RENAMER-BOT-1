@@ -21,28 +21,57 @@ from pyrogram.emoji import *
 async def force_name(c, m):
 
     await c.send_message(
-        message.reply_to_message.from_user.id,
-        "Now send me New Name without Extension",
-        reply_to_message_id=message.reply_to_message.message_id,
+        m.reply_to_message.from_user.id,
+        "Now send me New Name with Extension",
+        reply_to_message_id=m.reply_to_message.message_id,
         reply_markup=ForceReply(True)
     )
 
 
 #@RenamerNs.on_message((filters.document|filters.video) & filters.private & filters.incoming)
 #async def media(c, m):
-@RenamerNs.on_message(filters.command("aud") & filters.private & filters.incoming)
-async def aud(c, m):
-    """Checking and Processing the renaming"""
+#@RenamerNs.on_message(filters.command("aud") & filters.private & filters.incoming)
+#async def aud(c, m):
+#    """Checking and Processing the renaming"""
 
-    file = m.document or m.video or m.audio or m.voice or m.video_note
-    try:
-        filename = file.file_name
-    except:
-        filename = "Not Available"  
-
+@RenamerNs.on_message(filters.private & filters.reply & filters.text)
+async def cus_name(c, m):
+    
+    if (m.reply_to_message.reply_markup) and isinstance(m.reply_to_message.reply_markup, ForceReply):
+        asyncio.create_task(rename_doc(c, m))     
     else:
-        filesize = file.file_size
-        filetype = file.mime_type
+        print('No media present')
+
+    
+async def rename_doc(c, m):
+    
+    mssg = await c.get_messages(
+        m.chat.id,
+        m.reply_to_message.message_id
+    )    
+    
+    media = mssg.reply_to_message
+
+    
+    if media.empty:
+        await m.reply_text('Why did you delete that 😕', True)
+        return
+        
+    filetype = media.document or media.video or media.audio or media.voice or media.video_note
+    try:
+        actualname = filetype.file_name
+        splitit = actualname.split(".")
+        extension = (splitit[-1])
+    except:
+        extension = "mkv"
+    else:
+        actualsize = filetype.file_size
+
+    await c.delete_messages(
+        chat_id=m.chat.id,
+        message_ids=m.reply_to_message.message_id,
+        revoke=True
+    )
 
     if Config.BANNED_USERS:
         if m.from_user.id in Config.BANNED_USERS:
@@ -53,25 +82,26 @@ async def aud(c, m):
         if not is_logged and m.from_user.id not in Config.AUTH_USERS:
             return await m.reply_text(TEXT.NOT_LOGGED_TEXT, quote=True)
         
-    if Config.TIME_GAP:
-        time_gap = await timegap_check(m)
-        if time_gap:
-            return
+    #if Config.TIME_GAP:
+        #time_gap = await timegap_check(m)
+        #if time_gap:
+            #return
 
-    newfile_name = await c.ask(chat_id=m.from_user.id, text="**File Name:** `{}`\n\nNow Send Me New Name or /cancel".format(filename), reply_markup=ForceReply(True), filters=filters.text)
-    await newfile_name.delete()
-    await newfile_name.request.delete()
-    new_file_name = newfile_name.text
-    if new_file_name.lower() == "/cancel":
-        await m.delete()
-        return
+    #newfile_name = await c.ask(chat_id=m.from_user.id, text="**File Name:** `{}`\n\nNow Send Me New Name or /cancel".format(actualname), reply_markup=ForceReply(True), filters=filters.text)
+    #await newfile_name.delete()
+    #await newfile_name.request.delete()
+    #new_file_name = newfile_name.text
+    new_file_name = update.m
+    #if new_file_name.lower() == "/cancel":
+        #await m.delete()
+        #return
 
-    if Config.TIME_GAP:
-        time_gap = await timegap_check(m)
-        if time_gap:
-            return
-        Config.TIME_GAP_STORE[m.from_user.id] = time.time()
-        asyncio.get_event_loop().create_task(notify(m, Config.TIME_GAP))
+    #if Config.TIME_GAP:
+        #time_gap = await timegap_check(m)
+        #if time_gap:
+            #return
+        #Config.TIME_GAP_STORE[m.from_user.id] = time.time()
+        #asyncio.get_event_loop().create_task(notify(m, Config.TIME_GAP))
 
     send_message = await m.reply_text(TEXT.DOWNLOAD_START)
     trace_msg = None
