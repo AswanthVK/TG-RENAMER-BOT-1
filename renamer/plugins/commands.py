@@ -154,3 +154,62 @@ async def password(c, m):
                 return await m.reply_text(f'Incorrect password', quote=True)
     else:
         await m.reply_text(f'**This bot was publicly available to all {SMILING_FACE_WITH_HEARTS}.**\nIf you are the owner of the bot to make bot private add bot password in Config Vars {LOCKED_WITH_KEY}.', quote=True)
+
+
+@RenamerNs.on_message(filters.private & (filters.document | filters.video | filters.audio | filters.voice | filters.video_note))   
+async def rename_cb(bot, update):
+ 
+    file = update.document or update.video or update.audio or update.voice or update.video_note
+    try:
+        filename = file.file_name
+    except:
+        filename = "Not Available"  
+
+    else:
+        filesize = file.file_size
+        mime = file.mime_type
+
+    #if Config.TIME_GAP:
+        #time_gap = await timegap_check(update)
+        #if time_gap:
+            #return
+ 
+    #if Config.BANNED_USERS:
+        #if update.from_user.id in Config.BANNED_USERS:
+            #return await update.reply_text(f'Sorry!, You are BANNED.', quote=True)
+ 
+    #if update.from_user.id not in Config.BANNED_USERS:
+        #update_channel = Config.UPDATE_CHANNEL
+    #if update_channel:
+        #try:
+            #user = await bot.get_chat_member(update_channel, update.chat.id)
+            #if user.status == "kicked":
+               #await update.reply_text(" Sorry, You are **B A N N E D**")
+               #return
+        #except UserNotParticipant:
+            #await update.reply_text(f"Join @{update_channel} To Use Me")
+            #await update.reply_text(
+                #text="**Please Join My Update Channel Before Using Me..**",
+                #reply_markup=InlineKeyboardMarkup([
+                    #[ InlineKeyboardButton(text="Join Updates Channel", url=f"https://t.me/{update_channel}")]
+              #])
+            #)
+            #return
+        #else:
+    await bot.send_message(
+        chat_id=update.chat.id,
+        text="<b>File Name:</b> <code>{}</code> \n<b>Size:</b> {} \n<b>Format:</b> {} ".format(filename,humanbytes(filesize),mime),
+        if mime == "video":
+        	reply_markup = InlineKeyboardMarkup([[ 
+        	InlineKeyboardButton("📁 Documents",callback_data = "doc"), 
+        	InlineKeyboardButton("🎥 Video",callback_data = "vid") ]])
+        elif mime == "audio":
+        	reply_markup = InlineKeyboardMarkup([[ InlineKeyboardButton("📁 Documents",callback_data = "doc")
+        	,InlineKeyboardButton("🎵 audio",callback_data = "aud") ]])
+        		
+        #reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="Rename", callback_data="rename_button"),
+                                                #InlineKeyboardButton(text="Cancel", callback_data="cancel_e")]]),
+        parse_mode="html",
+        reply_to_message_id=update.message_id,
+        disable_web_page_preview=True   
+    )   
