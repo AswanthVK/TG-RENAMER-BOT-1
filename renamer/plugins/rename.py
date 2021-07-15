@@ -18,20 +18,8 @@ from pyrogram.errors import PeerIdInvalid, ChannelInvalid, FloodWait
 from pyrogram.emoji import *
 
 
-async def force_name(c, m):
-
-    await c.send_message(
-        message.reply_to_message.from_user.id,
-        "Now send me New Name without Extension",
-        reply_to_message_id=message.reply_to_message.message_id,
-        reply_markup=ForceReply(True)
-    )
-
-
-#@RenamerNs.on_message((filters.document|filters.video) & filters.private & filters.incoming)
-#async def media(c, m):
-@RenamerNs.on_message(filters.command("doc") & filters.private & filters.incoming)
-async def doc(c, m):
+@RenamerNs.on_message((filters.document|filters.video) & filters.private & filters.incoming)
+async def media(c, m):
     """Checking and Processing the renaming"""
 
     file = m.document or m.video or m.audio or m.voice or m.video_note
@@ -145,39 +133,39 @@ async def doc(c, m):
     caption = str(new_file_name)
     if Config.CUSTOM_CAPTION:
         caption += f"\n\n **{Config.CUSTOM_CAPTION}**"
-    #as_file = (await get_data(m.from_user.id)).upload_mode
-    #if as_file:
-    try:
-        await m.reply_document(
-            document=new_file_location,
-            caption=TEXT.CAPTION_TEXT.format(new_file_name),
-            thumb=thumbnail,
-            progress=progress_bar,
-            progress_args=("Uploading:", start_time, send_message)
-        )
-    except FloodWait as e:
-        await asyncio.sleep(e.x)
-        logger.warning(f"Got FloodWait for {e.x} Seconds")
-    except Exception as e:
-        logger.error(e)
+    as_file = (await get_data(m.from_user.id)).upload_mode
+    if as_file:
+        try:
+            await m.reply_document(
+                document=new_file_location,
+                caption=TEXT.CAPTION_TEXT.format(new_file_name),
+                thumb=thumbnail,
+                progress=progress_bar,
+                progress_args=("Uploading:", start_time, send_message)
+            )
+        except FloodWait as e:
+            await asyncio.sleep(e.x)
+            logger.warning(f"Got FloodWait for {e.x} Seconds")
+        except Exception as e:
+            logger.error(e)
 
-    #else:
-        #try:
-            #await m.reply_video(
-                #video=new_file_location,
-                #duration=duration,
-                #width=width,
-                #height=height,
-                #caption=TEXT.CAPTION_TEXT.format(new_file_name),
-                #thumb=thumbnail,
-                #progress=progress_bar,
-                #progress_args=("Uploading:", start_time, send_message)
-            #)
-        #except FloodWait as e:
-            #await asyncio.sleep(e.x)
-            #logger.warning(f"Got FloodWait for {e.x} Seconds")
-        #except Exception as e:
-            #logger.error(e)
+    else:
+        try:
+            await m.reply_video(
+                video=new_file_location,
+                duration=duration,
+                width=width,
+                height=height,
+                caption=TEXT.CAPTION_TEXT.format(new_file_name),
+                thumb=thumbnail,
+                progress=progress_bar,
+                progress_args=("Uploading:", start_time, send_message)
+            )
+        except FloodWait as e:
+            await asyncio.sleep(e.x)
+            logger.warning(f"Got FloodWait for {e.x} Seconds")
+        except Exception as e:
+            logger.error(e)
 
     try:
         await send_message.edit(TEXT.UPLOAD_SUCESS, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="♻️  SHARE ME  ♻️", url="tg://msg?text=Hai%20Friend%2C%0D%0AAm%20Introducing%20a%20Powerful%20%2A%2AConverter%20Bot%2A%2A%20for%20Free.%0D%0A%2A%2ABot%20Link%2A%2A%20%3A%20%40NewConverter_Bot")]]), disable_web_page_preview=True)
