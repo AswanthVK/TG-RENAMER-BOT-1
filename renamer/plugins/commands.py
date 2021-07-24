@@ -81,7 +81,7 @@ async def subscribers_count(bot, m: Message):
     active = messages[0]
     blocked = messages[1]
     await m.delete()
-    await msg.edit(TEXT.USERS_LIST.format(active, blocked))
+    await msg.edit(f"Total: \n\nSubscribers - {}\nBlocked / Deleted - {}".format(active, blocked))
 
 
 # ------------------------ Send messages to subs ----------------------------- #
