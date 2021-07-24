@@ -3,8 +3,6 @@ from pyrogram.emoji import *
 class TEXT:
     DOWNLOAD_START = f"Download Starting..."
     UPLOAD_START = f"Upload Starting..."
-    WAIT_MSG = f"**Please Wait...**"
-    REPLY_ERROR = f"Use this command as a reply to any telegram message with out any spaces."
     UPLOAD_SUCESS = f"{GRINNING_FACE} Thank you for using me."
     BANNED_USER_TEXT = f"Hey bro, you are **banned** from using me {FACE_WITH_TEARS_OF_JOY}."
     NOT_LOGGED_TEXT = f"This bot was only for private use {LOCKED_WITH_KEY}. If you want to use this bot you need to send me correct password in the format `/login bot_password`"
