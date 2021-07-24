@@ -53,9 +53,6 @@ async def start(c, m, cb=False):
     ]]
     reply_markup = InlineKeyboardMarkup(button)
     if cb:
-        id = m.from_user.id
-        user_name = '@' + m.from_user.username if m.from_user.username else None
-        await add_user(id, user_name)
         await m.message.edit(
             text=TEXT.START_TEXT.format(user_mention=m.from_user.mention, bot_owner=owner.mention(style="md")), 
             disable_web_page_preview=True,
