@@ -47,9 +47,8 @@ async def start(c, m, cb=False):
     #id = m.from_user.id
     #user_name = '@' + m.from_user.username if m.from_user.username else None
     #await add_user(id, user_name)
-
     owner = await c.get_users(Config.OWNER_ID)
-
+    owner_username = owner.username if owner.username else 'Ns_bot_updates'
     button = [[
         InlineKeyboardButton(f'{INFORMATION} Help', callback_data="help"),
         InlineKeyboardButton(f'{ROBOT} About', callback_data='about')
