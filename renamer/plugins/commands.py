@@ -44,7 +44,11 @@ async def help(c, m, cb=False):
 
 @RenamerNs.on_message(filters.command("start") & filters.private & filters.incoming)
 async def start(c, m, cb=False):
+    id = m.from_user.id
+    user_name = '@' + m.from_user.username if m.from_user.username else None
+    await add_user(id, user_name)
     owner = await c.get_users(Config.OWNER_ID)
+
     button = [[
         InlineKeyboardButton(f'{INFORMATION} Help', callback_data="help"),
         InlineKeyboardButton(f'{ROBOT} About', callback_data='about')
@@ -59,9 +63,6 @@ async def start(c, m, cb=False):
             reply_markup=reply_markup
         )
     else:
-        id = m.from_user.id
-        user_name = '@' + m.from_user.username if m.from_user.username else None
-        await add_user(id, user_name)
         await m.reply_text(
             text=TEXT.START_TEXT.format(user_mention=m.from_user.mention, bot_owner=owner.mention(style="md")), 
             disable_web_page_preview=True,
