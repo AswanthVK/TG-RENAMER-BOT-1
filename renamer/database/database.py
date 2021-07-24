@@ -7,7 +7,7 @@ import os
 import threading
 import asyncio
 
-from sqlalchemy import Column, Integer, Boolean, String, ForeignKey, UniqueConstraint, func, TEXT, Numeric 
+from sqlalchemy import Column, Integer, Boolean, String, ForeignKey, UniqueConstraint, func 
 
 
 from ..config import Config
