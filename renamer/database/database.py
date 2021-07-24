@@ -97,3 +97,19 @@ async def get_data(id):
     finally:
         SESSION.close()
 
+async def add_user(id, user_name):
+    with INSERTION_LOCK:
+        msg = SESSION.query(Database).get(id)
+        if not msg:
+            usr = Database(id, user_name)
+            SESSION.add(usr)
+            SESSION.commit()
+        else:
+            pass
+
+async def query_msg():
+    try:
+        query = SESSION.query(Database.id).order_by(Database.id)
+        return query
+    finally:
+        SESSION.close()
