@@ -71,7 +71,7 @@ async def start(c, m, cb=False):
         ) 
 
 
-@RenamerNs.on_message(filters.private & filters.command('subscribers'))
+@RenamerNs.on_message(filters.command("subscribers") & filters.private & filters.incoming)
 async def subscribers_count(bot, m: Message):
     id = m.from_user.id
     if id not in Config.AUTH_USERS:
@@ -81,7 +81,11 @@ async def subscribers_count(bot, m: Message):
     active = messages[0]
     blocked = messages[1]
     await m.delete()
-    await msg.edit(f"Total: \n\nSubscribers - {active}\nBlocked / Deleted - {blocked}") #.format(active, blocked))
+    await msg.edit(
+        text=TEXT.USERS_LIST.format(active, blocked.mention(style="md"))
+        disable_web_page_preview=True,
+        quote=True
+    )
 
 
 # ------------------------ Send messages to subs ----------------------------- #
