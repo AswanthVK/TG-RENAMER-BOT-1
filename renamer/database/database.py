@@ -7,7 +7,7 @@ import os
 import threading
 import asyncio
 
-from sqlalchemy import Column, Integer, Boolean, String, ForeignKey, UniqueConstraint, func, TEXT
+from sqlalchemy import Column, Integer, Boolean, String, ForeignKey, UniqueConstraint, func
 
 
 from ..config import Config
@@ -28,7 +28,7 @@ INSERTION_LOCK = threading.RLock()
 class Database(BASE):
     __tablename__ = "database"
     id = Column(Integer, primary_key=True)
-    user_name = Column(TEXT)
+    user_name = Column(Boolen)
     thumb_id = Column(Integer)
     upload_mode = Column(Boolean)
     is_logged = Column(Boolean)
