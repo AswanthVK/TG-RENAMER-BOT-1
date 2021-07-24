@@ -1,5 +1,5 @@
 import asyncio
-from ..database import query_msg
+from ..database.database import *
 from pyrogram.errors import FloodWait
 
 async def users_info(bot):
