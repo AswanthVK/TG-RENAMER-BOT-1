@@ -1,13 +1,11 @@
 import logging
 logger = logging.getLogger(__name__)
 
-import asyncio
 from ..config import Config
 from ..tools.text import TEXT
 from ..database.database import *
 from pyrogram import Client as RenamerNs, filters
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
-from pyrogram.errors import PeerIdInvalid, ChannelInvalid, FloodWait, UserNotParticipant
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup 
 from pyrogram.emoji import *
 
 
@@ -55,15 +53,15 @@ async def start(c, m, cb=False):
         await m.message.edit(
             text=TEXT.START_TEXT.format(user_mention=m.from_user.mention, bot_owner=owner.mention(style="md")), 
             disable_web_page_preview=True,
-            reply_markup=reply_markup,
+            reply_markup=reply_markup
         )
-    #else:
-        #await m.reply_text(
-            #text=TEXT.START_TEXT.format(user_mention=m.from_user.mention, bot_owner=owner.mention(style="md")), 
-            #disable_web_page_preview=True,
-            #reply_markup=reply_markup,
-            #quote=True
-        #) 
+    else:
+        await m.reply_text(
+            text=TEXT.START_TEXT.format(user_mention=m.from_user.mention, bot_owner=owner.mention(style="md")), 
+            disable_web_page_preview=True,
+            reply_markup=reply_markup,
+            quote=True
+        ) 
 
 
 ################## about command ##################
@@ -80,17 +78,18 @@ async def about(c, m, cb=False):
     reply_markup = InlineKeyboardMarkup(button)
     if cb:
         await m.message.edit(
-            text=TEXT.ABOUT,
+            text=TEXT.ABOUT.format(bot_name=me.mention(style='md'), bot_owner=owner.mention(style="md")),
             disable_web_page_preview=True,
             reply_markup=reply_markup
         )
     else:
         await m.reply_text(
-            text=TEXT.ABOUT,
+            text=TEXT.ABOUT.format(bot_name=me.mention(style='md'), bot_owner=owner.mention(style="md")),
             disable_web_page_preview=True,
             reply_markup=reply_markup,
             quote=True
         )
+
 
 ################## Mode command ##################
 
@@ -134,8 +133,6 @@ async def reset_user(c, m):
 @RenamerNs.on_message(filters.command('login') & filters.incoming & filters.private)
 async def password(c, m):
     if Config.BOT_PASSWORD:
-        if Config.AUTH_USERS is None:
-            Config.AUTH_USERS = [Config.OWNER_ID]
         if m.from_user.id in Config.AUTH_USERS:
             return await m.reply_text(f"__Hey you are auth user of this bot so you don't want to login {DETECTIVE_LIGHT_SKIN_TONE}.__")
 
@@ -156,5 +153,3 @@ async def password(c, m):
                 return await m.reply_text(f'Incorrect password', quote=True)
     else:
         await m.reply_text(f'**This bot was publicly available to all {SMILING_FACE_WITH_HEARTS}.**\nIf you are the owner of the bot to make bot private add bot password in Config Vars {LOCKED_WITH_KEY}.', quote=True)
-
-
