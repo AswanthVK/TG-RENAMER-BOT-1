@@ -46,7 +46,7 @@ async def help(c, m, cb=False):
 async def start(c, m, cb=False):
     id = m.from_user.id
     user_name = '@' + m.from_user.username if m.from_user.username else None
-    add_user = await add_user(id, user_name)
+    await add_user(id, user_name)
 
     owner = await c.get_users(Config.OWNER_ID)
 
