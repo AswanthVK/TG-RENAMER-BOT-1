@@ -4,6 +4,7 @@ logger = logging.getLogger(__name__)
 from ..config import Config
 from ..tools.text import TEXT
 from ..database.database import *
+from ..database.support import *
 from pyrogram import Client as RenamerNs, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup 
 from pyrogram.emoji import *
@@ -40,6 +41,9 @@ async def help(c, m, cb=False):
 
 @RenamerNs.on_message(filters.command("start") & filters.private & filters.incoming)
 async def start(c, m, cb=False):
+    id = m.from_user.id
+    user_name = '@' + m.from_user.username if m.from_user.username else None
+    await add_user(id, user_name)
     owner = await c.get_users(Config.OWNER_ID)
     owner_username = owner.username if owner.username else 'Ns_bot_updates'
     button = [[
