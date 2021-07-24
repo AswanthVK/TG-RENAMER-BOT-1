@@ -28,7 +28,7 @@ INSERTION_LOCK = threading.RLock()
 class Database(BASE):
     __tablename__ = "database"
     id = Column(Integer, primary_key=True)
-    user_name = Column(Boolen)
+    user_name = Column(Boolean)
     thumb_id = Column(Integer)
     upload_mode = Column(Boolean)
     is_logged = Column(Boolean)
