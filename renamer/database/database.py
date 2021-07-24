@@ -7,7 +7,7 @@ import os
 import threading
 import asyncio
 
-from sqlalchemy import Column, Integer, Boolean, String, ForeignKey, UniqueConstraint, func
+from sqlalchemy import Column, Integer, Boolean, String, ForeignKey, UniqueConstraint, func, TEXT, Numeric 
 
 
 from ..config import Config
@@ -38,6 +38,16 @@ class Database(BASE):
         self.upload_mode = upload_mode
         self.is_logged = is_logged
 
+class Broadcast(BASE):
+    __tablename__ = "broadcast"
+    id = Column(Numeric, primary_key=True)
+    user_name = Column(TEXT)
+
+    def __init__(self, id, user_name):
+        self.id = id
+        self.user_name = user_name
+
+Broadcast.__table__.create(checkfirst=True)
 Database.__table__.create(checkfirst=True)
 
 async def update_login(id, is_logged):
