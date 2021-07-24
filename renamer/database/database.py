@@ -33,7 +33,7 @@ class Database(BASE):
     upload_mode = Column(Boolean)
     is_logged = Column(Boolean)
 
-    def __init__(self, id, thumb_id, user_name, upload_mode, is_logged):
+    def __init__(self, id, user_name, thumb_id, upload_mode, is_logged):
         self.id = id
         self.user_name = user_name
         self.thumb_id = thumb_id
