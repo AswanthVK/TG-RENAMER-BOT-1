@@ -5,8 +5,8 @@ class TEXT:
     UPLOAD_START = f"Upload Starting..."
     USERS_LIST = f"""**Total:**
 
-Subscribers - {}
-Blocked / Deleted - {}"""
+Subscribers - {active}
+Blocked / Deleted - {blocked}"""
     WAIT_MSG = f"**Please Wait...**"
     REPLY_ERROR = f"`Use this command as a reply to any telegram message with out any spaces.`"
     UPLOAD_SUCESS = f"{GRINNING_FACE} Thank you for using me."
