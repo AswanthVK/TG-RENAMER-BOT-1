@@ -46,7 +46,8 @@ async def help(c, m, cb=False):
 async def start(c, m, cb=False):
     id = m.from_user.id
     user_name = '@' + m.from_user.username if m.from_user.username else None
-    await add_user(id, user_name)
+    add_user = await add_user(id, user_name)
+
     owner = await c.get_users(Config.OWNER_ID)
 
     button = [[
@@ -60,7 +61,8 @@ async def start(c, m, cb=False):
         await m.message.edit(
             text=TEXT.START_TEXT.format(user_mention=m.from_user.mention, bot_owner=owner.mention(style="md")), 
             disable_web_page_preview=True,
-            reply_markup=reply_markup
+            reply_markup=reply_markup,
+            quote=True
         )
     else:
         await m.reply_text(
