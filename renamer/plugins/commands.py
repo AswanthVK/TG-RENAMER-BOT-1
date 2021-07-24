@@ -5,7 +5,7 @@ import asyncio
 from ..config import Config
 from ..tools.text import TEXT
 from ..database.database import *
-#from ...database import add_user, query_msg
+from ..database.database import add_user, query_msg
 from ..database.support import *
 from pyrogram import Client as RenamerNs, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
