@@ -82,7 +82,7 @@ async def subscribers_count(bot, m: Message):
     blocked = messages[1]
     await m.delete()
     await msg.edit(
-        text=f'**Total:** \n\nSubscribers - {active}{}\nBlocked / Deleted - {blocked}{}'.format(active, blocked.mention(style="md"))
+        text=f'**Total:** \n\nSubscribers - {active}\nBlocked / Deleted - {blocked}', #format(active, blocked.mention(style="md"))
         disable_web_page_preview=True,
         quote=True
     )
