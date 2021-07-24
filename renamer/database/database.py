@@ -28,14 +28,12 @@ INSERTION_LOCK = threading.RLock()
 class Database(BASE):
     __tablename__ = "database"
     id = Column(Integer, primary_key=True)
-    user_name = Column(Boolean)
     thumb_id = Column(Integer)
     upload_mode = Column(Boolean)
     is_logged = Column(Boolean)
 
-    def __init__(self, id, user_name, thumb_id, upload_mode, is_logged):
+    def __init__(self, id, thumb_id, upload_mode, is_logged):
         self.id = id
-        self.user_name = user_name
         self.thumb_id = thumb_id
         self.upload_mode = upload_mode
         self.is_logged = is_logged
@@ -97,19 +95,3 @@ async def get_data(id):
     finally:
         SESSION.close()
 
-async def add_user(id, user_name):
-    with INSERTION_LOCK:
-        msg = SESSION.query(Database).get(id)
-        if not msg:
-            usr = Database(id, user_name)
-            SESSION.add(usr)
-            SESSION.commit()
-        else:
-            pass
-
-async def query_msg():
-    try:
-        query = SESSION.query(Database.id).order_by(Database.id)
-        return query
-    finally:
-        SESSION.close()
