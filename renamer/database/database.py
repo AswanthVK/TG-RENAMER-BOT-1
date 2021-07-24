@@ -38,16 +38,6 @@ class Database(BASE):
         self.upload_mode = upload_mode
         self.is_logged = is_logged
 
-class Broadcast(BASE):
-    __tablename__ = "broadcast"
-    id = Column(Numeric, primary_key=True)
-    user_name = Column(TEXT)
-
-    def __init__(self, id, user_name):
-        self.id = id
-        self.user_name = user_name
-
-Broadcast.__table__.create(checkfirst=True)
 Database.__table__.create(checkfirst=True)
 
 async def update_login(id, is_logged):
@@ -105,19 +95,3 @@ async def get_data(id):
     finally:
         SESSION.close()
 
-async def add_user(id, user_name):
-    with INSERTION_LOCK:
-        msg = SESSION.query(Broadcast).get(id)
-        if not msg:
-            usr = Broadcast(id, user_name)
-            SESSION.add(usr)
-            SESSION.commit()
-        else:
-            pass
-
-async def query_msg():
-    try:
-        query = SESSION.query(Broadcast.id).order_by(Broadcast.id)
-        return query
-    finally:
-        SESSION.close()
