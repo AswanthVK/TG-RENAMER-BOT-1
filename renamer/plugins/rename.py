@@ -193,7 +193,7 @@ async def media(c, m):
                     #width=width,
                     #height=height,
                     caption=TEXT.CAPTION_TEXT.format(new_file_name),
-                    thumb=thumbnail,
+                    #thumb=thumbnail,
                     progress=progress_bar,
                     progress_args=("Uploading:", start_time, send_message)
                 )
